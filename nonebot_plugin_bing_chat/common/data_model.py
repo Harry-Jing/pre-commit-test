@@ -189,7 +189,9 @@ class BingChatResponse(BaseModel):
                 }
             }:
                 logger.error(f'<Bing检测到敏感问题，自动隐藏>\n{hidden_text}')
-                raise BingChatResponseException(f'<Bing检测到敏感问题，自动隐藏>\n{hidden_text}')
+                raise BingChatResponseException(
+                    f'<Bing检测到敏感问题，自动隐藏>\n{hidden_text}'
+                )
 
             case {
                 'item': {

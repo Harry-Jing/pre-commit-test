@@ -136,7 +136,9 @@ async def bingchat_command_chat(
         )
     except BingChatAccountReachLimitException as exc:
         if plugin_config.bingchat_auto_switch_cookies:
-            await matcher.send(reply_out(event, '检测到达到账户上限，将自动刷新账户，所有对话将被清空'))
+            await matcher.send(
+                reply_out(event, '检测到达到账户上限，将自动刷新账户，所有对话将被清空')
+            )
             if not await switch_to_usable_cookies():
                 await matcher.finish('无可用cookies')
             for user_data in plugin_data.user_data_dict.values():
@@ -154,9 +156,13 @@ async def bingchat_command_chat(
     ) as exc:
         if plugin_config.bingchat_auto_refresh_conversation:
             if isinstance(exc, BingChatConversationReachLimitException):
-                await matcher.send(reply_out(event, '检测到达到对话上限，将自动刷新对话'))
+                await matcher.send(
+                    reply_out(event, '检测到达到对话上限，将自动刷新对话')
+                )
             if isinstance(exc, BingChatConversationReachLimitException):
-                await matcher.send(reply_out(event, '检测到达到对话过期，将自动刷新对话'))
+                await matcher.send(
+                    reply_out(event, '检测到达到对话过期，将自动刷新对话')
+                )
             await bingchat_command_new_chat(
                 bot=bot, event=event, matcher=matcher, arg=arg, depth=depth
             )
@@ -188,7 +194,9 @@ async def bingchat_command_chat(
                     platform='qq', user_id=event.user_id
                 )
     except BingChatResponseException as exc:
-        await matcher.finish(reply_out(event, f'<调用content_simple时出错>\n{str(exc)}'))
+        await matcher.finish(
+            reply_out(event, f'<调用content_simple时出错>\n{str(exc)}')
+        )
     finally:
         await chatbot.close()
 
