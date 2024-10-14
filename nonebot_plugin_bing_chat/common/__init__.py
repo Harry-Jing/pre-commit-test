@@ -72,7 +72,9 @@ def init() -> None:
         )
     for cookies_file_path in plugin_cookies_file_path_list:
         if cookies_file_path.stat().st_size == 0:
-            raise RuntimeError(f'BingChat插件未配置cookie，请在{cookies_file_path}中填入你的cookie')
+            raise RuntimeError(
+                f'BingChat插件未配置cookie，请在{cookies_file_path}中填入你的cookie'
+            )
         try:
             with open(cookies_file_path, 'r', encoding='utf-8') as f:
                 json.load(f)
